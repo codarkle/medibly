@@ -84,7 +84,7 @@ export default function LogIn()
   };
 
   return (
-      <div className="w-full max-w-md flex flex-col items-center">
+      <div className="w-full min-h-[550px] h-[calc(80vh-75px)] max-w-md flex flex-col items-center justify-center">
         <h1 className="font-bold text-2xl sm:text-3xl lg:text-4xl text-gray-800 text-center mb-4 ">
           Log In to Medibly
         </h1>

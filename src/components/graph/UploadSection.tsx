@@ -73,20 +73,20 @@ export default function UploadSection() {
     if (!wasUploaded) return;
 
     try {
-      const res = await fetch(`/api/export`);
-      if (!res.ok) throw new Error("Failed to export");
-
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `profit-report.pdf`;
-      link.click();
-    } catch (error) {
-      console.error("Export failed:", error);
-      toast.error("Failed to export PDF.");
-    }
+        const res = await fetch(`/api/export?month=${selectedMonth}`, { method: 'POST' });
+        if (!res.ok) throw new Error("Failed to export");
+  
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+  
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `${selectedMonth}-profit-report.pdf`;
+        link.click();
+      } catch (error) {
+        console.error("Export failed:", error);
+        toast.error("Failed to export PDF.");
+      }
   }
 
   return (
