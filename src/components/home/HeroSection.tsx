@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <div className="w-[90%] md:w-[80%] lg:w-[75%] xl:w-[70%] mx-auto aspect-[19/12] mt-5 md:mt-16 bg-[url(/images/bg.png)] bg-cover bg-no-repeat">
+    <div className="w-[90%] md:w-[80%] lg:w-[75%] xl:w-[70%] mx-auto aspect-[19/12] mt-5 md:mt-16 bg-[url(/images/bg.jpg)] bg-cover bg-no-repeat">
       <div className="p-3 sm:p-6 md:p-10 w-[70%] h-[90%] flex flex-col justify-around">
         <h1 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 leading-tight">
           Streamline Your Financial Insights with Medibly

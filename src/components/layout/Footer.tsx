@@ -21,7 +21,7 @@ export default function Footer() {
           </div>
         <div className="flex py-2 pl-5">
           <Link
-            href="/twitter"
+            href="#"
             className="flex justify-center items-center flex-nowrap overflow-hidden px-2"
           >
             <Image
@@ -33,7 +33,7 @@ export default function Footer() {
             />
           </Link>
           <Link
-            href="/facebook"
+            href="#"
             className="flex justify-center items-center flex-nowrap overflow-hidden px-2"
           >
             <Image
@@ -45,7 +45,7 @@ export default function Footer() {
             />
           </Link>
           <Link
-            href="/instagram"
+            href="#"
             className="flex justify-center items-center flex-nowrap overflow-hidden px-2"
           >
             <Image
@@ -57,7 +57,7 @@ export default function Footer() {
             />
           </Link>
           <Link
-            href="/linkedin"
+            href="#"
             className="flex justify-center items-center flex-nowrap overflow-hidden px-2"
           >
             <Image
@@ -85,7 +85,7 @@ export default function Footer() {
             </Link>
           </div>
           <span className="flex text-[16px] font-normal text-[#9ca3af] text-left py-2">
-            Connecting doctors with equipment merchants worldwide.
+            Connecting doctors with financial insights worldwide.
           </span>
           <div className="flex py-2">
             <Link

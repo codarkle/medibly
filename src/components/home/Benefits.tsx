@@ -14,7 +14,7 @@ type Benefit = {
 const benefitsData: Benefit[] = [
   {
     title: "For Doctors",
-    icon: "/icons/benefit/cN6VWOd7SP.svg",
+    icon: "/icons/howitworks/users.svg",
     items: [
       {
         heading: "No Spreadsheets, Just Insights",
