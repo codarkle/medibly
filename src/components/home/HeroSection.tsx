@@ -23,7 +23,7 @@ export default function HeroSection() {
           >
             <Link href="/graph" className="flex justify-center items-center px-6">
             <Image
-              src="/images/brand.png"
+              src="/images/brand.jpg"
               alt="Brand logo"
               width={40}
               height={40}

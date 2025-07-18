@@ -14,7 +14,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
       <head>
         <title>Medibly</title>
-        <link rel="icon" href="/images/brand.png" />
+        <link rel="icon" href="/images/brand.jpg" />
       </head>
       
       <body>

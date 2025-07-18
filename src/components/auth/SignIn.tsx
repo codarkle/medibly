@@ -53,7 +53,8 @@ export default function LogIn()
     if (validateForm()) {
       setLoading(true);
       signIn("credentials", {
-        redirect: false,
+        redirect: true,
+        callbackUrl: "/graph",
         email: formData.email,
         password: formData.password,
       }).then((res) => {
@@ -66,8 +67,6 @@ export default function LogIn()
           toast.error(res.error);
         } else {
           toast.success("You logged in successfully.");
-          router.refresh();
-          router.push("/graph");
         }
       });
     } else {

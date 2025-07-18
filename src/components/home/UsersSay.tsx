@@ -18,7 +18,7 @@ const users: UserReview[] = [
     name: "Dr. Sarah Johnson",
     role: "Dermatologist",
     location: "New York",
-    imageSrc: "/images/users/woman1.png",
+    imageSrc: "/images/users/woman1.jpg",
     review:
       "Medibly's monthly dashboards help me understand my clinic's finances at a glance. No spreadsheets, no confusion — just clear insights.",
     rating: 4,
@@ -28,7 +28,7 @@ const users: UserReview[] = [
     name: "Dr. Michael Rodriguez",
     role: "Plastic Surgeon",
     location: "Los Angeles",
-    imageSrc: "/images/users/man1.png",
+    imageSrc: "/images/users/man1.jpg",
     review:
       "Since using Medibly, I've been able to track profits and reduce unnecessary expenses with ease. It's like having a CFO in my pocket.",
     rating: 5,
@@ -37,7 +37,7 @@ const users: UserReview[] = [
     name: "David Chen",
     role: "Clinic Administrator",
     location: "Atlanta",
-    imageSrc: "/images/users/man2.png",
+    imageSrc: "/images/users/man2.jpg",
     review:
       "Medibly streamlines financial reporting for all our doctors. Uploading data is simple, and the visual reports are a game-changer for monthly reviews.",
     rating: 5,

@@ -28,7 +28,7 @@ export default function Header({ type }: { type: "login" | "register" | "home" |
             aria-label="Go to homepage"
             >
             <Image
-              src={type === "graph" ? "/images/brand.png" : "/images/logo.png"}
+              src={type === "graph" ? "/images/brand.jpg" : "/images/logo.jpg"}
               alt="logo Icon"
               width={48}
               height={48}
@@ -112,7 +112,7 @@ export default function Header({ type }: { type: "login" | "register" | "home" |
                 { status=="authenticated" && (type=="home"||type=="graph") && (
                     <button 
                     className="h-[42px] w-[80px] py-1 rounded-lg border border-sky-600 text-sky-600 text-base font-normal leading-5 hover:bg-sky-50 transition-colors"
-                    onClick={() => signOut()}
+                    onClick={() => signOut({ callbackUrl: "/" })}
                 >
                     LogOut
                 </button>

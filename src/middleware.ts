@@ -7,21 +7,22 @@ export default async function middleware(req: NextRequest) {
   // Public paths that don't require authentication
   const publicPaths = ["/", "/login", "/register"];
 
-  const session = await getToken({
-    req,
-    secret: process.env.NEXTAUTH_SECRET,
-  });
+  // Only get token if accessing protected route
+  const isPublicPath = publicPaths.includes(pathname);
+  let session = null;
+
+  if (!isPublicPath) {
+    session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  }
 
   const isAuthenticated = !!session;
 
-  // If user is not authenticated and trying to access a protected page
-  if (!isAuthenticated && !publicPaths.includes(pathname)) {
+  if (!isAuthenticated && !isPublicPath) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  // If user is authenticated and trying to access login/register, redirect them
   if (isAuthenticated && ["/login", "/register"].includes(pathname)) {
-    return NextResponse.redirect(new URL("/graph", req.url));
+    return NextResponse.redirect(new URL("/", req.url));
   }
 
   return NextResponse.next();
@@ -29,7 +30,8 @@ export default async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    // Apply middleware to all routes except static files and APIs
-    "/((?!_next/static|_next/image|favicon.ico|api).*)",
+    "/graph",
+    "/register",
+    "/login",
   ],
 };

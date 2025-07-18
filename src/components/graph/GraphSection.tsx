@@ -12,7 +12,7 @@ export default function GraphSection() {
       </span>
       <div className="relative w-full h-full aspect-[7/4] mx-auto">
       <Image
-        src="/images/graph.png"
+        src="/images/graph.jpg"
         alt="Film equipment landing"
         className="object-contain w-full h-full"
         fill
