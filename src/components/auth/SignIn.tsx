@@ -48,27 +48,29 @@ export default function LogIn()
   };
 
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
       setLoading(true);
-      signIn("credentials", {
+      await signIn("credentials", {
         redirect: false,
         email: formData.email,
         password: formData.password,
       }).then((res) => {
         if (!res) {
           toast.error("Unknown error occurred.");
-          return;
         }
-        setLoading(false);
-        if (res.error) {
+        else if (res.error) {
           toast.error(res.error);
         } else {
+          setLoading(false);
           toast.success("You logged in successfully.");
-          router.push("/graph");
         }
       });
+      if(! loading){
+        router.push("/graph");
+      }
+      setLoading(false);
     } else {
       // Show first error as toast
       if (errors.email) {

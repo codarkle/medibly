@@ -4,34 +4,26 @@ import { NextRequest, NextResponse } from "next/server";
 export default async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Public paths that don't require authentication
-  const publicPaths = ["/", "/login", "/register"];
-
-  // Only get token if accessing protected route
-  const isPublicPath = publicPaths.includes(pathname);
-  let session = null;
-
-  if (!isPublicPath) {
-    session = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  // Only protect /graph
+  if (pathname === "/graph") {
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    if (!token) {
+      return NextResponse.redirect(new URL("/login", req.url));
+    }
   }
 
-  const isAuthenticated = !!session;
-
-  if (!isAuthenticated && !isPublicPath) {
-    return NextResponse.redirect(new URL("/login", req.url));
-  }
-
-  if (isAuthenticated && ["/login", "/register"].includes(pathname)) {
-    return NextResponse.redirect(new URL("/", req.url));
+  // If user is logged in and tries to visit /login or /register, redirect to /
+  if (["/login", "/register"].includes(pathname)) {
+    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+    if (token) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
   }
 
   return NextResponse.next();
 }
 
+// ✅ Only match the 3 routes that might need auth handling
 export const config = {
-  matcher: [
-    "/graph",
-    "/register",
-    "/login",
-  ],
+  matcher: ["/graph", "/login", "/register"],
 };
