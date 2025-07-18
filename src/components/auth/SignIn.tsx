@@ -53,8 +53,7 @@ export default function LogIn()
     if (validateForm()) {
       setLoading(true);
       signIn("credentials", {
-        redirect: true,
-        callbackUrl: "/graph",
+        redirect: false,
         email: formData.email,
         password: formData.password,
       }).then((res) => {
@@ -67,6 +66,7 @@ export default function LogIn()
           toast.error(res.error);
         } else {
           toast.success("You logged in successfully.");
+          router.push("/graph");
         }
       });
     } else {
@@ -162,7 +162,7 @@ export default function LogIn()
           </Button>
         <div className="w-full flex justify-center border-t border-gray-200 pt-6 mt-2">
           <span className="text-base text-gray-600">
-            Don&apost have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link
               href="/register"
               className="font-normal text-sky-600 text-base underline p-0 h-auto"

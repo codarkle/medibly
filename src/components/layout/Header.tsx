@@ -6,9 +6,17 @@ import { useSession } from 'next-auth/react';
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import Image from 'next/image';
+import { useRouter } from "next/navigation";
 
 export default function Header({ type }: { type: "login" | "register" | "home" | "graph" }) {
   const { status } = useSession();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await signOut({ redirect: false });
+    router.push("/login");
+  };
+
   return (
     <header className="bg-white z-10 px-4 h-[74px] shadow-md fixed w-full">
         <div className="md:w-4/5 lg:w-3/4 mx-auto flex items-center justify-between h-[74px] p-4">
@@ -112,7 +120,7 @@ export default function Header({ type }: { type: "login" | "register" | "home" |
                 { status=="authenticated" && (type=="home"||type=="graph") && (
                     <button 
                     className="h-[42px] w-[80px] py-1 rounded-lg border border-sky-600 text-sky-600 text-base font-normal leading-5 hover:bg-sky-50 transition-colors"
-                    onClick={() => signOut({ callbackUrl: "/" })}
+                    onClick={handleLogout}
                 >
                     LogOut
                 </button>
