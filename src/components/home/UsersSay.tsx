@@ -114,7 +114,7 @@ const UserCard: React.FC<{ user: UserReview }> = ({ user }) => {
 
 export default function UsersSay() {
   return (
-    <section id="waitlist" className="bg-[#f9fafb] my-16">
+    <section id="waitlist" className="bg-[#f9fafb] mb-16">
       <h2 className="flex justify-center items-start text-[30px] font-bold text-[#1f2937] text-center whitespace-nowrap">
         What Our Users Say
       </h2>

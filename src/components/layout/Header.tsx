@@ -2,11 +2,11 @@
 
 import React from "react";
 import Link from "next/link"
+import { useRouter } from "next/navigation";
 import { useSession } from 'next-auth/react';
 import { signOut } from "next-auth/react";
-import { Button } from "@/components/ui/button";
 import Image from 'next/image';
-import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 export default function Header({ type }: { type: "login" | "register" | "home" | "graph" }) {
   const { status } = useSession();
@@ -19,7 +19,7 @@ export default function Header({ type }: { type: "login" | "register" | "home" |
 
   return (
     <header className="bg-white z-10 px-4 h-[74px] shadow-md fixed w-full">
-        <div className="md:w-4/5 lg:w-3/4 mx-auto flex items-center justify-between h-[74px] p-4">
+        <div className="md:w-4/5 mx-auto flex items-center justify-between h-[74px] p-4">
         <a
             href="#"
             className="flex items-center cursor-pointer"

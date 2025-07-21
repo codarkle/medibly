@@ -50,7 +50,7 @@ export default function ReportHistory() {
     <div className="min-w-[300px] mt-10">
       <h2 className="text-[30px] font-bold text-[#1f2937] text-center mb-5">Report History</h2>
       <div className="border rounded-lg overflow-hidden border-gray-400">
-        <div className="grid grid-cols-2 bg-gray-100 font-medium text-left px-4 py-2">
+        <div className="grid grid-cols-2 bg-gray-200 font-medium text-left px-4 py-2">
           <div>Month</div>
           <div>Report</div>
         </div>
@@ -58,18 +58,29 @@ export default function ReportHistory() {
         {loading ? (
           <div className="text-center py-4 text-gray-500">Loading...</div>
         ) : (
-          <div className={`divide-y ${posts.length > 3 ? 'max-h-40 overflow-y-auto' : ''}`}>
+          <div className={` ${posts.length >= 3 ? 'max-h-40 overflow-y-auto' : ''}`}>
             {posts.map((post) => (
               <div key={post.id} className="grid grid-cols-2 px-4 py-2 hover:bg-gray-50">
-                <div>{`${post.month}`}</div>
+                <div>{post.month}</div>
                 <div>
-                <button
-                    onClick={() => handleDownload(`${post.month}`)}
+                  <button
+                    onClick={() => handleDownload(post.month)}
                     className="hover:text-blue-600 hover:underline cursor-pointer"
                   >
                     Download PDF
                   </button>
                 </div>
+              </div>
+            ))}
+
+            {/* Fill in empty rows if fewer than 4 */}
+            {Array.from({ length: Math.max(0, 3 - posts.length) }).map((_, i) => (
+              <div
+                key={`empty-${i}`}
+                className="grid grid-cols-2 px-4 py-2 text-gray-300"
+              >
+                <div>—</div>
+                <div>—</div>
               </div>
             ))}
           </div>

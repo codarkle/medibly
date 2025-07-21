@@ -16,14 +16,14 @@ export async function POST(req: NextRequest) {
   const month = searchParams.get("month") || "Unknown month";
 
   // 1. Fetch raw data
-  const data = await prisma.bill.findMany({
-    select: { name: true, amount: true },
+  const data = await prisma.billingReport.findMany({
+    select: { procedure: true, paid: true },
   });
 
-  // 2. Group by name and sum amounts
+  // 2. Group by procedure and sum paids
   const grouped: Record<string, number> = {};
-  data.forEach(({ name, amount }) => {
-    grouped[name] = (grouped[name] || 0) + amount;
+  data.forEach(({ procedure, paid }) => {
+    grouped[procedure] = (grouped[procedure] || 0) + paid;
   });
   const groupedData = Object.entries(grouped); // [ ['Alice', 123.45], ['Bob', 98.76], ... ]
 
@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
   });
 
   // 4. Draw grouped data with pagination
-  groupedData.forEach(([name, total]) => {
+  groupedData.forEach(([procedure, total]) => {
     // If we’ve reached the limit, start a new page
     if (currentLine >= MAX_LINES_PER_PAGE) {
       page = pdfDoc.addPage([PAGE_WIDTH, PAGE_HEIGHT]);
@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
 
     const yPosition = PAGE_HEIGHT - START_Y - currentLine * LINE_HEIGHT;
 
-    page.drawText(`${name}: $${total.toFixed(2)}`, {
+    page.drawText(`${procedure}: $${total.toFixed(2)}`, {
       x: 50,
       y: yPosition,
       size: 14,
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
   return new Response(pdfBytes, {
     headers: {
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `attachment; filename="${month}-profit-report.pdf"`,
+      'Content-Disposition': `attachment; fileprocedure="${month}-profit-report.pdf"`,
     },
   });
 }

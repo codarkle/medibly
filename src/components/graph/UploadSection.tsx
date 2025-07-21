@@ -1,23 +1,20 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Upload, Download } from "lucide-react";
-import toast from "react-hot-toast";
-import MonthPicker from "../ui/MonthPicker";
+import { Upload } from "lucide-react";
+import toast from "react-hot-toast"; 
 
-function getCurrentMonth(): string {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  return `${year}-${month}`;
-}
-
-export default function UploadSection() {
-  const [selectedMonth, setSelectedMonth] = useState(getCurrentMonth());
-  const [wasUploaded, setWasUploaded] = useState(false);
+export default function UploadSection({
+  selectedMonth,
+}: {
+  selectedMonth: string;
+}) {
+  const [billExist, setBillExist] = useState(false);
+  const [bankExist, setBankExist] = useState(false);
   const [checkingMonth, setCheckingMonth] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef2 = useRef<HTMLInputElement>(null);
 
   // Check if month already exists in database
   useEffect(() => {
@@ -26,11 +23,11 @@ export default function UploadSection() {
       try {
         const res = await fetch(`/api/upload/check?month=${selectedMonth}`);
         const data = await res.json();
-        setWasUploaded(data.exists === true);
-          
+        setBillExist(data.billexist === true);
+        setBankExist(data.bankexist === true);
       } catch (err) { 
         console.error("Failed to check month:", err);
-        setWasUploaded(false); // fail open
+        setBillExist(false);
       } finally {
         setCheckingMonth(false);
       }
@@ -48,13 +45,13 @@ export default function UploadSection() {
       formData.append("month", selectedMonth); // optional: if your backend needs it
 
       try {
-        const res = await fetch("/api/upload", {
+        const res = await fetch(`/api/upload?filetype=billingreport`, {
           method: "POST",
           body: formData,
         });
   
         const data = await res.json();
-        setWasUploaded(true);
+        setBillExist(true);
         toast.success(data.message || "Upload success!");
         window.location.reload();
         
@@ -65,30 +62,43 @@ export default function UploadSection() {
     }
   };
 
-  const handleClick = () => {
-    if (!wasUploaded) {
-      fileInputRef.current?.click();
+  const handleFileChange2 = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    const formData = new FormData();
+
+    if (selectedFile) {
+      formData.append("file", selectedFile);
+      formData.append("month", selectedMonth); // optional: if your backend needs it
+
+      try {
+        const res = await fetch(`/api/upload?filetype=bankstatement`, {
+          method: "POST",
+          body: formData,
+        });
+  
+        const data = await res.json();
+        setBankExist(true);
+        toast.success(data.message || "Upload success!");
+        window.location.reload();
+        
+      } catch (error) {
+        console.error("File upload failed:", error);
+        toast.error("Upload failed.");
+      }
     }
   };
 
-  const handleDownload = async () => {
-    if (!wasUploaded) return;
 
-    try {
-        const res = await fetch(`/api/export?month=${selectedMonth}`, { method: 'POST' });
-        if (!res.ok) throw new Error("Failed to export");
-  
-        const blob = await res.blob();
-        const url = URL.createObjectURL(blob);
-  
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = `${selectedMonth}-profit-report.pdf`;
-        link.click();
-      } catch (error) {
-        console.error("Export failed:", error);
-        toast.error("Failed to export PDF.");
-      }
+  const handleClick = () => {
+    if (!billExist) {
+      fileInputRef.current?.click();
+    }
+  }; 
+
+  const handleClick2 = () => {
+    if (!bankExist) {
+      fileInputRef2.current?.click();
+    }
   }
 
   return (
@@ -97,18 +107,16 @@ export default function UploadSection() {
         Upload Documents
       </span>
 
-      <MonthPicker value={selectedMonth} onChange={setSelectedMonth} />
-
       <div className="mt-5 w-full"> 
         <div className="flex items-center mx-auto justify-center text-base gap-4">
           <input type="file" accept=".csv,.xlsx" onChange={handleFileChange} ref={fileInputRef} hidden />
-
+          <input type="file" accept=".csv,.xlsx" onChange={handleFileChange2} ref={fileInputRef2} hidden />
           <button
             type="button"
             onClick={handleClick}
-            disabled={wasUploaded || checkingMonth}
+            disabled={billExist || checkingMonth}
             className={`bg-white flex flex-col items-center justify-center border-2 max-w-[140px] max-h-[140px] rounded-2xl p-5 text-black active:scale-95 transition-transform duration-150 shadow-md ${
-              wasUploaded || checkingMonth
+              billExist || checkingMonth
                 ? "border-gray-300 text-gray-400 cursor-not-allowed"
                 : "border-gray-200 hover:shadow-lg cursor-pointer"
             }`}
@@ -117,31 +125,30 @@ export default function UploadSection() {
             <span>
               {checkingMonth
                 ? "Checking..."
-                : wasUploaded
+                : billExist
                 ? "Already Uploaded"
-                : "Upload Bank Statement"}
+                : "Upload Bill Report"}
             </span>
-          </button>
-
+          </button> 
           <button
             type="button"
-            onClick={handleDownload}
-            disabled={!wasUploaded || checkingMonth} 
+            onClick={handleClick2}
+            disabled={bankExist || checkingMonth}
             className={`bg-white flex flex-col items-center justify-center border-2 max-w-[140px] max-h-[140px] rounded-2xl p-5 text-black active:scale-95 transition-transform duration-150 shadow-md ${
-              wasUploaded
-                ? "border-gray-200 hover:shadow-lg cursor-pointer"
-                : "border-gray-300 text-gray-400 cursor-not-allowed"
+              bankExist || checkingMonth
+                ? "border-gray-300 text-gray-400 cursor-not-allowed"
+                : "border-gray-200 hover:shadow-lg cursor-pointer"
             }`}
           >
-            <Download size={48} />
+            <Upload size={48} />
             <span>
               {checkingMonth
                 ? "Checking..."
-                : wasUploaded
-                ? "Download Graph"
-                : "Not Uploaded"}
+                : bankExist
+                ? "Already Uploaded"
+                : "Upload Bank Statement"}
             </span>
-          </button>
+          </button> 
         </div>
       </div>
     </div>

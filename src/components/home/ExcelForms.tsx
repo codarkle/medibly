@@ -12,10 +12,10 @@ export default function DownForms() {
               Join Medibly today and input these excel forms for <br />
               your growing business.
             </div>
-            <div className="flex justify-center items-center bg-[rgba(0,0,0,0)] mt-8 ml-[16px]">
+            <div className="flex flex-col sm:flex-row justify-center items-center bg-[rgba(0,0,0,0)] mt-8 gap-4">
               <a
-                href="/bills.xlsx"
-                download="bills.xlsx"
+                href="/bank_statement.xlsx"
+                download="bank_statement.xlsx"
                 className="bg-[rgba(0,0,0,0)] rounded-[8px] border-solid border-2 border-[#fff] p-4 mx-2 cursor-pointer inline-block"
               >
                 <span className="flex justify-center items-center text-[16px] font-medium text-[#fff] whitespace-nowrap gap-2">
@@ -25,8 +25,8 @@ export default function DownForms() {
               </a>
 
               <a
-                href="/bills.xlsx"
-                download="bills.xlsx"
+                href="/billing_report.xlsx"
+                download="billing_report.xlsx"
                 className="bg-[#fff] rounded-[8px] p-4 mx-2 cursor-pointer inline-block"
               >
                 <span className="flex justify-center items-center text-[16px] font-medium text-[#0369a1] whitespace-nowrap gap-2">
