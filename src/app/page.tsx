@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Header type="home"/>
-      <div className="min-w-screen bg-transparent mt-20">
+      <div className="min-w-screen bg-transparent mt-16">
         <HeroSection />
         <HowItWorks />
         <Benefits />

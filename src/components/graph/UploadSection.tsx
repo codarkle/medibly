@@ -56,6 +56,8 @@ export default function UploadSection() {
         const data = await res.json();
         setWasUploaded(true);
         toast.success(data.message || "Upload success!");
+        window.location.reload();
+        
       } catch (error) {
         console.error("File upload failed:", error);
         toast.error("Upload failed.");
@@ -90,8 +92,8 @@ export default function UploadSection() {
   }
 
   return (
-    <div className="flex flex-col px-5 items-center justify-center">
-      <span className="flex justify-center items-center text-[30px] font-bold text-[#1f2937] text-center mb-5">
+    <div className="flex flex-col px-5 items-center justify-center mt-5">
+      <span className="text-[30px] font-bold text-[#1f2937] mb-5">
         Upload Documents
       </span>
 

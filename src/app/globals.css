@@ -27,3 +27,9 @@ body {
 #_rht_toaster {
     top: 60px !important;
 }
+
+.btn-intro{
+  background-image: linear-gradient(90deg, rgb(93, 93, 93) 0%, rgb(158, 158, 158) 100%);
+  background-color: black;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 3px 11px 0px;
+}

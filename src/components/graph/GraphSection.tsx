@@ -7,7 +7,7 @@ export default function GraphSection() {
   
   return (
     <div className="flex flex-col px-5 items-center justify-center mb-8 lg:w-4/7">
-      <span className="flex justify-center items-center text-[30px] font-bold text-[#1f2937] text-center mb-4">
+      <span className="text-[30px] font-bold text-[#1f2937] mb-5">
         Financial Dashboard
       </span>
       <div className="relative w-full h-full aspect-[1/3] md:aspect-[7/4] mx-auto">

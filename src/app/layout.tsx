@@ -2,7 +2,6 @@
 
 import { SessionProvider } from 'next-auth/react';
 import { Toaster } from "react-hot-toast"; 
-import Head from 'next/head';
 import "./globals.css";
 
 export default function RootLayout({

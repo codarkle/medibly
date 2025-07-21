@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
   });
 
   // 4. Draw grouped data with pagination
-  groupedData.forEach(([name, total], index) => {
+  groupedData.forEach(([name, total]) => {
     // If we’ve reached the limit, start a new page
     if (currentLine >= MAX_LINES_PER_PAGE) {
       page = pdfDoc.addPage([PAGE_WIDTH, PAGE_HEIGHT]);
