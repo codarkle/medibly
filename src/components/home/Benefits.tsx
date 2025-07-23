@@ -20,19 +20,19 @@ const benefitsData: Benefit[] = [
         heading: "No Spreadsheets, Just Insights",
         description:
           "Upload your monthly data and get interactive financial dashboards - no manual calculations or Excel headaches.",
-        icon: "/icons/benefit/4hj7BV15cJ.svg",
+        icon: "/icons/benefit/thbjzmnzog.svg",
       },
       {
         heading: "Complete Financial Clarity",
         description:
           "Visualize revenue, expenses, and cash flow with intuitive dashboards designed for non-financial professionals.",
-        icon: "/icons/benefit/8q5khOuczM.svg",
+        icon: "/icons/benefit/YmDxot2faX.svg",
       },
       {
         heading: "Secure, Personalized Access",
         description:
           "View your reports anytime through your private portal, with password-protected access and downloadable PDFs.",
-        icon: "/icons/benefit/YmDxot2faX.svg",
+        icon: "/icons/benefit/8q5khOuczM.svg",
       },
     ],
   },
@@ -50,7 +50,7 @@ const benefitsData: Benefit[] = [
         heading: "High-Value Service Offering",
         description:
           "Deliver polished, automated financial insights that elevate your services and client trust.",
-        icon: "/icons/benefit/thbjzmnzog.svg",
+        icon: "/icons/benefit/4hj7BV15cJ.svg",
       },
       {
         heading: "Business Growth",

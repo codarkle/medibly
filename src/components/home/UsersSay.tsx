@@ -101,7 +101,7 @@ const UserCard: React.FC<{ user: UserReview }> = ({ user }) => {
         </div>
       </div>
 
-      <div className="relative mt-4 ml-6 h-[96px] text-[#4b5563] text-[16px] font-normal leading-[19.364px] pr-2">
+      <div className="relative px-5 mt-6 h-[96px] text-[#4b5563] text-[16px] font-normal leading-[19.364px] ">
             {user.review}
       </div>
 

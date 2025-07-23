@@ -47,9 +47,9 @@ export default function ReportHistory() {
 
 
   return (
-    <div className="min-w-[300px] mt-10">
+    <div className="w-full mt-10 px-5">
       <h2 className="text-[30px] font-bold text-[#1f2937] text-center mb-5">Report History</h2>
-      <div className="border rounded-lg overflow-hidden border-gray-400">
+      <div className="border rounded-lg overflow-hidden border-gray-200 shadow-md">
         <div className="grid grid-cols-2 bg-gray-200 font-medium text-left px-4 py-2">
           <div>Month</div>
           <div>Report</div>

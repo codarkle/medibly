@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" 
+viewBox="0 0 512 512" fill="none" stroke="#444" stroke-width="16"
+stroke-linecap="round" stroke-linejoin="round">
+  <!-- Main document body excluding the folded corner -->
+  <path d="
+    M144 32
+    H336
+    A16 16 0 0 1 348.7 36.7
+    L443.3 131.3
+    A16 16 0 0 1 448 144
+    V416
+    A32 32 0 0 1 416 448
+    H144
+    A32 32 0 0 1 112 416
+    V64
+    A32 32 0 0 1 144 32
+    Z" fill="#fff"/>
+
+  <!-- Folded corner overlay with rounded inner edge -->
+  <path d="
+    M352 32
+    L448 128
+    H384
+    A32 32 0 0 1 352 96
+    V32
+    Z" fill="#eee"/>
+
+  <!-- Up arrow shaft -->
+  <line x1="286" y1="360" x2="286" y2="184" />
+
+  <!-- Up arrow head -->
+  <polyline points="246 224 286 184 326 224" />
+</svg>

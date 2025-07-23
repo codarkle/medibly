@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { Upload } from "lucide-react";
 import toast from "react-hot-toast"; 
+import Image from "next/image";
 
 export default function UploadSection({
   selectedMonth,
@@ -102,54 +102,63 @@ export default function UploadSection({
   }
 
   return (
-    <div className="flex flex-col px-5 items-center justify-center mt-5">
+    <div className="flex flex-col items-center justify-center mt-5 w-full px-5">
       <span className="text-[30px] font-bold text-[#1f2937] mb-5">
         Upload Documents
       </span>
-
-      <div className="mt-5 w-full"> 
-        <div className="flex items-center mx-auto justify-center text-base gap-4">
-          <input type="file" accept=".csv,.xlsx" onChange={handleFileChange} ref={fileInputRef} hidden />
-          <input type="file" accept=".csv,.xlsx" onChange={handleFileChange2} ref={fileInputRef2} hidden />
-          <button
-            type="button"
-            onClick={handleClick}
-            disabled={billExist || checkingMonth}
-            className={`bg-white flex flex-col items-center justify-center border-2 max-w-[140px] max-h-[140px] rounded-2xl p-5 text-black active:scale-95 transition-transform duration-150 shadow-md ${
-              billExist || checkingMonth
-                ? "border-gray-300 text-gray-400 cursor-not-allowed"
-                : "border-gray-200 hover:shadow-lg cursor-pointer"
-            }`}
-          >
-            <Upload size={48} />
-            <span>
-              {checkingMonth
-                ? "Checking..."
-                : billExist
-                ? "Already Uploaded"
-                : "Upload Bill Report"}
-            </span>
-          </button> 
-          <button
-            type="button"
-            onClick={handleClick2}
-            disabled={bankExist || checkingMonth}
-            className={`bg-white flex flex-col items-center justify-center border-2 max-w-[140px] max-h-[140px] rounded-2xl p-5 text-black active:scale-95 transition-transform duration-150 shadow-md ${
-              bankExist || checkingMonth
-                ? "border-gray-300 text-gray-400 cursor-not-allowed"
-                : "border-gray-200 hover:shadow-lg cursor-pointer"
-            }`}
-          >
-            <Upload size={48} />
-            <span>
-              {checkingMonth
-                ? "Checking..."
-                : bankExist
-                ? "Already Uploaded"
-                : "Upload Bank Statement"}
-            </span>
-          </button> 
-        </div>
+      <div className="mt-5 w-full mx-auto flex items-center justify-around text-base gap-4"> 
+        <input type="file" accept=".csv,.xlsx" onChange={handleFileChange} ref={fileInputRef} hidden />
+        <input type="file" accept=".csv,.xlsx" onChange={handleFileChange2} ref={fileInputRef2} hidden /> 
+        <button
+          type="button"
+          onClick={handleClick2}
+          disabled={bankExist || checkingMonth}
+          className={`bg-white w-1/2 min-h-[160px] flex flex-col items-center justify-center border-1 rounded-2xl p-5 text-black active:scale-95 transition-transform duration-150 shadow-sm ${
+            bankExist || checkingMonth
+              ? "border-gray-300 cursor-not-allowed opacity-60"
+              : "border-gray-200 hover:shadow-lg cursor-pointer"
+          }`}
+        >
+        <Image
+          src="/icons/upload.svg"
+          alt="upload icon"
+          width={512}
+          height={512}
+          className="w-16 h-16"
+        />
+          <span className="max-w-[150px]">
+            {checkingMonth
+              ? "Checking..."
+              : bankExist
+              ? "Bank Statement (Uploaded)"
+              : <>Upload<br/>Bank Statement</>}
+          </span>
+        </button> 
+        <button
+          type="button"
+          onClick={handleClick}
+          disabled={billExist || checkingMonth}
+          className={`bg-white w-1/2 min-h-[160px] flex flex-col items-center justify-center border-1 rounded-2xl p-5 text-black active:scale-95 transition-transform duration-150 shadow-sm ${
+            billExist || checkingMonth
+              ? "border-gray-300 opacity-60 cursor-not-allowed"
+              : "border-gray-200 hover:shadow-lg cursor-pointer"
+          }`}
+        >
+        <Image
+          src="/icons/upload.svg"
+          alt="upload icon"
+          width={512}
+          height={512}
+          className="w-16 h-16"
+        />
+          <span className="max-w-[150px]">
+            {checkingMonth
+              ? "Checking..."
+              : billExist
+              ? "Revenue Report (Uploaded)"
+              : <>Upload<br/>Revenue Report</>}
+          </span>
+        </button> 
       </div>
     </div>
   );

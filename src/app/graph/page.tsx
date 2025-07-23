@@ -2,9 +2,13 @@
 
 import { useState } from "react";
 import { Header } from "@/components/layout";
-import GraphSection from "@/components/graph/GraphSection"; 
 import UploadSection from "@/components/graph/UploadSection"; 
 import DownloadSection from "@/components/graph/DownloadSection";
+import dynamic from 'next/dynamic'
+
+const PowerBIViewer = dynamic(() => import('@/components/graph/PowerBIViewer'), {
+  ssr: false,
+})
 
 function getCurrentMonth(): string {
   const now = new Date();
@@ -19,12 +23,14 @@ export default function Home() {
   return (
     <>
       <Header type="graph"/>
-      <div className="min-w-screen flex flex-col justify-center lg:flex-row bg-transparent pt-24 pb-12 relative sm:w-[90%] md:w-4/5">
-        <GraphSection 
-          selectedMonth={selectedMonth}
-          setSelectedMonth={setSelectedMonth}
-        /> 
-        <div className="flex flex-col md:flex-row lg:flex-col items-center md:justify-around">
+      <div className="flex flex-col justify-between lg:flex-row bg-transparent pt-24 pb-12 w-[90%] xl:w-4/5 mx-auto">
+        <div className="w-full flex flex-col px-5 items-center justify-center mt-5 lg:w-2/3">
+          <PowerBIViewer 
+            selectedMonth={selectedMonth}
+            setSelectedMonth={setSelectedMonth}
+          />
+        </div>
+        <div className="w-full flex flex-col items-center md:flex-row lg:flex-col lg:w-1/3">
           <UploadSection selectedMonth={selectedMonth}/>
           <DownloadSection />
         </div>
