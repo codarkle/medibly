@@ -83,8 +83,8 @@ export async function POST(req: NextRequest) {
       embedUrl: embedRes.data.embedUrl,
       accessToken: embedRes.data.token,
     });
-  } catch (err: any) {
-    console.error(err?.response?.data || err.message);
+  } catch (error) {
+    console.error('POST /api/powerbi error:', error);
     return NextResponse.json({ error: 'Power BI error' }, { status: 500 });
   }
 }
