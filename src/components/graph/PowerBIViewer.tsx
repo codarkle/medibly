@@ -16,26 +16,26 @@ export default function PowerBIViewer({
   
   const [config, setEmbedConfig] = useState<models.IReportEmbedConfiguration | null>(null)
 
-  useEffect(() => {
-    const fetchEmbedConfig = async () => {
-      const res = await fetch('/api/powerbi', {
-        method: 'POST',
-        body: JSON.stringify({ selectedMonth }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const config = await res.json()
-      if(!config.error){
-        setEmbedConfig(config);
-      }
-      else{
-        setEmbedConfig(null);
-      }
-    }
+  // useEffect(() => {
+  //   const fetchEmbedConfig = async () => {
+  //     const res = await fetch('/api/powerbi', {
+  //       method: 'POST',
+  //       body: JSON.stringify({ selectedMonth }),
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
+  //     const config = await res.json()
+  //     if(!config.error){
+  //       setEmbedConfig(config);
+  //     }
+  //     else{
+  //       setEmbedConfig(null);
+  //     }
+  //   }
 
-    fetchEmbedConfig()
-  }, [selectedMonth])
+  //   fetchEmbedConfig()
+  // }, [selectedMonth])
 
   if(!config) return (
     <>
