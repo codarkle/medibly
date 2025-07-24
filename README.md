@@ -14,7 +14,7 @@ NEXTAUTH_SECRET="<random_secret_key>"
 Second, run the development server:
 
 ```bash
-npm run install
+npm install
 npm run build
 npm start
 ```

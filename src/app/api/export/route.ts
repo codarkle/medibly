@@ -1,6 +1,8 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import prisma from '@/lib/prisma'; // Adjust if your prisma path differs
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
 
 // Constants
 const PAGE_WIDTH = 600;
@@ -12,12 +14,31 @@ const START_Y = 200;
 const MAX_LINES_PER_PAGE = Math.floor((PAGE_HEIGHT - START_Y - MARGIN_BOTTOM) / LINE_HEIGHT);
 
 export async function POST(req: NextRequest) {
+
+  const session = await getServerSession(authOptions);
+  if (!session?.user) {
+    return NextResponse.json({ error: 'You must be logged in to create a post' }, { status: 401 });
+  }
+  const userId = parseInt(session.user.id, 10);
+
   const { searchParams } = new URL(req.url);
   const month = searchParams.get("month") || "Unknown month";
 
+  // ✅ Check if post already exists
+  const post = await prisma.post.findFirst({
+    where: {
+      month,
+      authorId: userId,
+    },
+  });
+
+  if(!post){
+    return NextResponse.json({ error: 'Post is not exist' }, { status: 404 });
+  }
   // 1. Fetch raw data
   const data = await prisma.billingReport.findMany({
     select: { procedure: true, paid: true },
+    where: {  postId: post.id}
   });
 
   // 2. Group by procedure and sum paids

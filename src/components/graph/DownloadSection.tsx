@@ -25,7 +25,6 @@ export default function ReportHistory() {
   }, []);
 
   const handleDownload = async (month: string) => {
-    /*
     try {
       const res = await fetch(`/api/export?month=${encodeURIComponent(month)}`, {
         method: 'POST',
@@ -44,11 +43,6 @@ export default function ReportHistory() {
       console.error('Export failed:', error);
       alert('Failed to export PDF.'); // or toast if you use one
     }
-    */
-    const link = document.createElement('a');
-    link.href = '/powerbi.pdf';
-    link.download = `${month}-profit-report.pdf`;
-    link.click();
   };
 
 
